@@ -34,41 +34,77 @@ public class Snake {
 	}
 
 	public void update() {
+		Location headLoc = new Location(head.getLocation().x, head.getLocation().y);
 		//1. use a switch statement to check on the currentDirection
 		//   of the snake and calculate its next x and y position.
-		
+		switch(currentDirection) {
+		case UP:
+			headLoc.y--;
+			
+		case DOWN:
+			headLoc.y++;
+			
+		case RIGHT:
+			headLoc.x++;
+			
+		case LEFT:
+			headLoc.x--;
+			
+		}
 
 		//2. Iterate through the SnakeSegments in reverse order
 		//2a. Update each snake segment to the location of the segment 
 		//    in front of it.
-		
+		for(int i = 0; i < snake.size(); i ++) {
+			snake.get(i).setLocation(snake.get(i+1).getLocation());
+			
+		}
 		
 		//3. set the location of the head to the new location calculated in step 1
-		
+		head.setLocation(headLoc);
 
 		//4. set canMove to true
-		
+		canMove = true;
 	}
 
 	public void setDirection(Direction d) {
 		//1. set the current direction equal to the passed in Direction only if canMove is true.
 		//   set canMove equal to false.
 		//   make sure the snake cannot completely reverse directions.
+		if(currentDirection == Direction.RIGHT && d == Direction.LEFT) {
+			canMove = false;
+			
+		}else if(currentDirection == Direction.LEFT && d == Direction.RIGHT	) {
+			canMove = false;
+			
+		}else if(currentDirection == Direction.UP && d == Direction.LEFT) {
+			canMove = false;
+			
+		}else if(currentDirection == Direction.DOWN && d == Direction.UP) {
+			canMove = false;
+			
+		}else if(canMove == true ) {
+			currentDirection = d;
+			canMove = false;
+		}
+		
 		
 	}
 
 	public void reset(Location loc) {
 		//1. clear the snake
-		
+		snake.clear();
 		//2. set the location of the head
+		head.setLocation(new Location(_00_SnakeGame.WIDTH / 2, _00_SnakeGame.HEIGHT / 2));
 		
 		//3. add the head to the snake
-		
+		snake.add(head);
 	}
 
 	public boolean isOutOfBounds() {
 		//1. complete the method so it returns true if the head of the snake is outside of the window
 		//   and false otherwise
+		
 		
 		return false;
 	}
