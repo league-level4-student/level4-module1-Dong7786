@@ -26,6 +26,7 @@ public class Snake {
 	public void feed() {
 		//1. add a new SnakeSegment object to the snake
 		snake.add(new SnakeSegment(snake.get(0).getLocation(), BODY_SIZE));
+		
 	}
 
 	public Location getHeadLocation() {
@@ -112,11 +113,11 @@ public class Snake {
 	public boolean isOutOfBounds() {
 		//1. complete the method so it returns true if the head of the snake is outside of the window
 		//   and false otherwise
-		if(head.getLocation().x < 0 || head.getLocation().x > _00_SnakeGame.WINDOW_WIDTH	) {
+		if(head.getLocation().x < 0 || head.getLocation().x >= _00_SnakeGame.WIDTH	) {
 			
 			return true;
 		
-		}else if(head.getLocation().y < 0 || head.getLocation().y > _00_SnakeGame.WINDOW_HEIGHT) {
+		}else if(head.getLocation().y < 0 || head.getLocation().y >= _00_SnakeGame.HEIGHT) {
 			
 			return true;
 			
@@ -131,7 +132,7 @@ public class Snake {
 		
 		for(int i = 1; i < snake.size(); i ++) {
 			
-			if(head.getLocation() == snake.get(i).getLocation()) {
+			if(head.getLocation().equals(snake.get(i).getLocation())) {
 				
 				return true;
 				

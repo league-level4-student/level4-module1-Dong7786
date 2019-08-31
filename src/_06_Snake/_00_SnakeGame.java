@@ -22,8 +22,8 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 	public static final Color BORDER_COLOR = Color.WHITE;
 	public static final Color BACKGROUND_COLOR = Color.BLACK;
 	public static final Color FOOD_COLOR = Color.RED;
-	public static final int WIDTH = 15;
-	public static final int HEIGHT = 12;
+	public static final int WIDTH = 37;
+	public static final int HEIGHT = 18;
 	public static final int WINDOW_SCALE = 50;
 	public static final int WINDOW_WIDTH = WINDOW_SCALE * WIDTH;
 	public static final int WINDOW_HEIGHT = WINDOW_SCALE * HEIGHT;
@@ -88,11 +88,11 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		// of the game. The smaller the number, the faster it goes.
 		switch (choice) {
 		case "Beginner":
-			timer.setDelay(1000);
+			timer.setDelay(1250);
 		case "Moderate":
-			timer.setDelay(500);
-		case "Expert":
 			timer.setDelay(250);
+		case "Expert":
+			timer.setDelay(100);
 
 		}
 		// 3. start the timer
@@ -178,7 +178,7 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		
 		if(again == 0) {
 			snake.reset(new Location(WIDTH / 2, HEIGHT / 2));
-			
+			timer.start();
 		}else {
 			
 			
@@ -212,6 +212,7 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		if(snake.getHeadLocation().equals(foodLocation)) {
 			System.out.println("Yum");
 			snake.feed();
+			setFoodLocation();
 		}
 
 		// 4. call panel.repaint();
